@@ -1,5 +1,6 @@
 package com.energias.renovables.modelo.energiasolar;
 
+import com.energias.renovables.modelo.energiasrenovables.EnergiasRenovables;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,5 +22,10 @@ public class EnergiaSolar {
     private BigDecimal radiacionSolarPromedio;
     private BigDecimal areaPaneles;
     private BigDecimal anguloInclinacion;
+    
+    @MapsId
+    @OneToOne
+    @JoinColumn ( name = "id" )
+    private EnergiasRenovables energiasRenovables;
     
 }
