@@ -1,5 +1,6 @@
 package com.energias.renovables.modelo.plantaproduccion;
 
+import com.energias.renovables.modelo.energiasrenovables.EnergiasRenovables;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,4 +25,6 @@ public class PlantaProduccion {
     private BigDecimal eficiencia;
     private Date fechaCreacion;
     
+    @OneToOne ( mappedBy = "plantaProduccion", cascade = CascadeType.ALL, fetch = FetchType.LAZY )
+    private EnergiasRenovables energiasRenovables;
 }
