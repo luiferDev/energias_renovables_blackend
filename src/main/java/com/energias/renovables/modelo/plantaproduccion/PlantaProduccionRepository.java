@@ -30,11 +30,11 @@ public interface PlantaProduccionRepository extends JpaRepository <PlantaProducc
 //            """)
 //    List<PlantaProduccionSolarDTO> findAllPlantaProduccionSolar ();
     
-    @Query("""
-        SELECT p, e, s FROM PlantaProduccion p
-        JOIN EnergiasRenovables e ON e.id = p.id
-        JOIN EnergiaSolar s ON s.id = e.id
-        """)
-    List<Object[]> findAllPlantaProduccionSolarWithEntities();
+    @Query ( """
+            SELECT p, e, s FROM PlantaProduccion p
+            JOIN EnergiasRenovables e ON e.id = p.id
+            JOIN EnergiaSolar s ON s.id = e.id
+            """ )
+    List <Object[]> findAllPlantaProduccionSolarWithEntities ();
     
 }
