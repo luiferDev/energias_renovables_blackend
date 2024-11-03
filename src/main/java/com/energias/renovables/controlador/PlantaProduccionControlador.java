@@ -16,11 +16,6 @@ import java.util.List;
 @RequestMapping ( "api/planta-produccion" )
 public class PlantaProduccionControlador {
     
-    private PlantaProduccionRepository plantaProduccionRepository;
-    
-    public PlantaProduccionControlador ( PlantaProduccionRepository plantaProduccionRepository ) {
-        this.plantaProduccionRepository = plantaProduccionRepository;
-    }
     @Autowired
     PlantaProduccionService plantaProduccionService;
     
