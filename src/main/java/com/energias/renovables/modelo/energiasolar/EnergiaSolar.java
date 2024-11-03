@@ -22,6 +22,7 @@ public class EnergiaSolar {
     private BigDecimal radiacionSolarPromedio;
     private BigDecimal areaPaneles;
     private BigDecimal anguloInclinacion;
+    private BigDecimal eficienciaPaneles;
     
     @MapsId
     @OneToOne
