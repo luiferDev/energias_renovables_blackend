@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 @RestController
 @RequestMapping ( "/api/energias-renovables" )
@@ -18,7 +19,7 @@ public class EnergiasRenovablesControlador {
         this.energiaRenovableFactoryService = energiaRenovableFactoryService;
     }
     
-//    @GetMapping ( "/calcular-total" )
+    //    @GetMapping ( "/calcular-total" )
 //    public ResponseEntity <BigDecimal> calcularProduccionEnergia ( @RequestParam String tipoenergia ) {
 //        var s = energiaRenovableFactoryService.getCalculadoraEnergia( tipoenergia )
 //                .calcularProduccionEnergia();
@@ -27,8 +28,10 @@ public class EnergiasRenovablesControlador {
 //
     @GetMapping ( "/calcular" )
     public ResponseEntity <BigDecimal> calcularProduccionEnergia ( @RequestParam String tipoenergia,
-                                                                  @RequestParam int id ) {
+                                                                   @RequestParam int id ) {
         var s = energiaRenovableFactoryService.calcularProduccionPorTipo( tipoenergia, id );
-        return ResponseEntity.ok( s );
+        BigDecimal resultadoCompacto = s.divide( new BigDecimal( "1000000" ),
+                2, RoundingMode.HALF_UP );
+        return ResponseEntity.ok( resultadoCompacto );
     }
 }
