@@ -32,13 +32,13 @@ public record PaisPlantaEnergiaSolarDTO(
                         plantaProduccion.capacidad_instalada(),
                         plantaProduccion.eficiencia(),
                         plantaProduccion.fecha_creacion() ),
-                new EnergiasRenovablesDTO( plantaProduccion.energia_renovable().id(),
-                        plantaProduccion.energia_renovable().nombre(),
-                        plantaProduccion.energia_renovable().tipoEnergiaId() ),
-                new EnergiaSolarDTO( plantaProduccion.energia_solar().id(),
-                        plantaProduccion.energia_solar().radiacionSolarPromedio(),
-                        plantaProduccion.energia_solar().areaPaneles(),
-                        plantaProduccion.energia_solar().anguloInclinacion() )
+                new EnergiasRenovablesDTO( energiaRenovable.id(),
+                        energiaRenovable.nombre(),
+                        energiaRenovable.tipoEnergiaId() ),
+                new EnergiaSolarDTO( energiaSolar.id(),
+                        energiaSolar.radiacionSolarPromedio(),
+                        energiaSolar.areaPaneles(),
+                        energiaSolar.anguloInclinacion() )
         );
     }
 }
