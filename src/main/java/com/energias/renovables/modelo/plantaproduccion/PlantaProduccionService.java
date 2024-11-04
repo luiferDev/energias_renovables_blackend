@@ -1,5 +1,7 @@
 package com.energias.renovables.modelo.plantaproduccion;
 
+import com.energias.renovables.modelo.biomasa.Biomasa;
+import com.energias.renovables.modelo.biomasa.BiomasaDTO;
 import com.energias.renovables.modelo.energiasolar.EnergiaSolar;
 import com.energias.renovables.modelo.energiasolar.EnergiaSolarDTO;
 import com.energias.renovables.modelo.energiasrenovables.EnergiasRenovables;
@@ -40,6 +42,35 @@ public class PlantaProduccionService {
                     plantaProduccion.getEficiencia(),
                     energiaRenovable,
                     energiaSolar,
+                    plantaProduccion.getFechaCreacion()
+            );
+        } ).collect( Collectors.toList() );
+    }
+    public List <PlantaProduccionBiomasaDTO> findAllPlantaProduccionBiomasa () {
+        List <Object[]> results = plantaProduccionRepository.findAllPlantaProduccionBiomasaWithEntities();
+
+        return results.stream().map( row -> {
+            PlantaProduccion plantaProduccion = ( PlantaProduccion ) row[ 0 ];
+            EnergiasRenovablesDTO energiaRenovable = new EnergiasRenovablesDTO(
+                    ( ( EnergiasRenovables ) row[ 1 ] ).getId(),
+                    ( ( EnergiasRenovables ) row[ 1 ] ).getNombre(),
+                    ( ( EnergiasRenovables ) row[ 1 ] ).getTipoEnergiaId().getId()
+            );
+            BiomasaDTO biomasa = new BiomasaDTO(
+                    ( ( Biomasa ) row[ 2 ] ).getId(),
+                    ( ( Biomasa ) row[ 2 ] ).getOrigen(),
+                    ( ( Biomasa ) row[ 2 ] ).getContenidoEnergetico(),
+                    ( ( Biomasa ) row[ 2 ] ).getCantidad(),
+                    ( ( Biomasa ) row[ 2 ] ).getMetodoCoversion()
+            );
+
+            return new PlantaProduccionBiomasaDTO(
+                    plantaProduccion.getId(),
+                    plantaProduccion.getUbicacion(),
+                    plantaProduccion.getCapacidadInstalada(),
+                    plantaProduccion.getEficiencia(),
+                    energiaRenovable,
+                    biomasa,
                     plantaProduccion.getFechaCreacion()
             );
         } ).collect( Collectors.toList() );

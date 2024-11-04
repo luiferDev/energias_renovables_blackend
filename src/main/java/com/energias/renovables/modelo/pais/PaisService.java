@@ -1,5 +1,7 @@
 package com.energias.renovables.modelo.pais;
 
+import com.energias.renovables.modelo.biomasa.Biomasa;
+import com.energias.renovables.modelo.biomasa.BiomasaDTO;
 import com.energias.renovables.modelo.energiasolar.EnergiaSolar;
 import com.energias.renovables.modelo.energiasolar.EnergiaSolarDTO;
 import com.energias.renovables.modelo.energiasrenovables.EnergiasRenovables;
@@ -55,5 +57,43 @@ public class PaisService {
             );
         } ).collect( Collectors.toList() );
         
+    }
+    
+    public List <PaisPlantaEnergiaBiomasa> findAllPaisPlantaEnergiaBiomasa () {
+        
+        List <Object[]> results = paisRepository.findAllPaisPlantaEnergiaBiomasa();
+        
+        return results.stream().map( row -> {
+            Pais pais = ( Pais ) row[ 0 ];
+            PlantaProduccionDTO plantaProduccionBiomasa = new PlantaProduccionDTO(
+                    ( ( PlantaProduccion ) row[ 1 ] ).getId(),
+                    ( ( PlantaProduccion ) row[ 1 ] ).getUbicacion(),
+                    ( ( PlantaProduccion ) row[ 1 ] ).getCapacidadInstalada(),
+                    ( ( PlantaProduccion ) row[ 1 ] ).getEficiencia(),
+                    ( ( PlantaProduccion ) row[ 1 ] ).getFechaCreacion()
+            );
+            EnergiasRenovablesDTO energiaRenovable = new EnergiasRenovablesDTO(
+                    ( ( EnergiasRenovables ) row[ 2 ] ).getId(),
+                    ( ( EnergiasRenovables ) row[ 2 ] ).getNombre(),
+                    ( ( EnergiasRenovables ) row[ 2 ] ).getTipoEnergiaId().getId()
+            );
+            BiomasaDTO biomasa = new BiomasaDTO(
+                    ( ( Biomasa ) row[ 3 ] ).getId(),
+                    ( ( Biomasa ) row[ 3 ] ).getOrigen(),
+                    ( ( Biomasa ) row[ 3 ] ).getContenidoEnergetico(),
+                    ( ( Biomasa ) row[ 3 ] ).getCantidad(),
+                    ( ( Biomasa ) row[ 3 ] ).getMetodoCoversion()
+            );
+            return new PaisPlantaEnergiaBiomasa(
+                    pais.getId(),
+                    pais.getNombre(),
+                    pais.getEnergiarequerida(),
+                    pais.getNivelcovertura(),
+                    pais.getPoblacion(),
+                    plantaProduccionBiomasa,
+                    energiaRenovable,
+                    biomasa
+            );
+        } ).collect( Collectors.toList() );
     }
 }

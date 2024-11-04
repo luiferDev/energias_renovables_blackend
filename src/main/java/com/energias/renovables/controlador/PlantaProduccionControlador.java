@@ -1,10 +1,6 @@
 package com.energias.renovables.controlador;
 
-import com.energias.renovables.modelo.plantaproduccion.PlantaProduccion;
-import com.energias.renovables.modelo.plantaproduccion.PlantaProduccionRepository;
-import com.energias.renovables.modelo.plantaproduccion.PlantaProduccionService;
-import com.energias.renovables.modelo.plantaproduccion.PlantaProduccionSolarDTO;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.energias.renovables.modelo.plantaproduccion.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,12 +12,20 @@ import java.util.List;
 @RequestMapping ( "api/planta-produccion" )
 public class PlantaProduccionControlador {
     
-    @Autowired
-    PlantaProduccionService plantaProduccionService;
+    private final PlantaProduccionService plantaProduccionService;
+
+    public PlantaProduccionControlador ( PlantaProduccionService plantaProduccionService ) {
+        this.plantaProduccionService = plantaProduccionService;
+    }
     
-    @GetMapping
-    public ResponseEntity <List <PlantaProduccionSolarDTO>> getPlantaProduccion () {
+    @GetMapping( "energia-solar" )
+    public ResponseEntity <List <PlantaProduccionSolarDTO>> getPlantaProduccionSolar () {
         return ResponseEntity.ok( plantaProduccionService.findAllPlantaProduccionSolar() );
+    }
+    
+    @GetMapping ( "biomasa" )
+    public ResponseEntity <List <PlantaProduccionBiomasaDTO>> getPlantaProduccionBiomasa () {
+        return ResponseEntity.ok( plantaProduccionService.findAllPlantaProduccionBiomasa() );
     }
     
 }
