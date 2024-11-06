@@ -8,25 +8,23 @@ import com.energias.renovables.modelo.plantaproduccion.PlantaProduccionSolarDTO;
 import java.math.BigDecimal;
 
 public record PaisPlantaEnergiaSolarDTO(
-        int id,
-        String nombre,
-        BigDecimal energiarequerida,
-        BigDecimal nivelcovertura,
-        BigDecimal poblacion,
+        PaisDTO pais,
         PlantaProduccionDTO plantaProduccion,
         EnergiasRenovablesDTO energia_renovable,
         EnergiaSolarDTO energia_solar
 ) {
-    public PaisPlantaEnergiaSolarDTO ( Pais pais,
+    public PaisPlantaEnergiaSolarDTO ( PaisDTO pais,
                                        PlantaProduccionSolarDTO plantaProduccion,
                                        EnergiasRenovablesDTO energiaRenovable,
                                        EnergiaSolarDTO energiaSolar ) {
         this(
-                pais.getId(),
-                pais.getNombre(),
-                pais.getEnergiarequerida(),
-                pais.getNivelcovertura(),
-                pais.getPoblacion(),
+                new PaisDTO(
+                        pais.id(),
+                        pais.nombre(),
+                        pais.energiarequerida(),
+                        pais.nivelcovertura(),
+                        pais.poblacion()
+                ),
                 new PlantaProduccionDTO( plantaProduccion.id(),
                         plantaProduccion.ubicacion(),
                         plantaProduccion.capacidad_instalada(),

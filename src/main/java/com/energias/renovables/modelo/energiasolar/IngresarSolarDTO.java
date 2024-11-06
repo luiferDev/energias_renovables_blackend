@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 public record IngresarSolarDTO(
         BigDecimal radiacionSolarPromedio,
         BigDecimal areaPaneles,
-        BigDecimal anguloInclinacion
+        BigDecimal anguloInclinacion,
+        BigDecimal eficienciaPaneles
 ) {
 }

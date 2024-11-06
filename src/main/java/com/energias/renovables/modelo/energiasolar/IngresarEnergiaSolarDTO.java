@@ -28,7 +28,8 @@ public record IngresarEnergiaSolarDTO(
                 new IngresarSolarDTO(
                         energiaSolar.radiacionSolarPromedio(),
                         energiaSolar.areaPaneles(),
-                        energiaSolar.anguloInclinacion()
+                        energiaSolar.anguloInclinacion(),
+                        energiaSolar.eficienciaPaneles()
                 ),
                 new IngresarPaisDTO(
                         pais.nombre(),

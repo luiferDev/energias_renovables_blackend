@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -26,5 +27,15 @@ public class PaisControlador {
     @GetMapping ( "biomasa" )
     public ResponseEntity <List <PaisPlantaEnergiaBiomasa>> getPaisBiomasa () {
         return ResponseEntity.ok( paisService.findAllPaisPlantaEnergiaBiomasa() );
+    }
+    
+    @GetMapping("solar")
+    public ResponseEntity <List <PaisPlantaEnergiaSolarDTO>> obtenerPaisSolar ( @RequestParam String nombre ) {
+        return ResponseEntity.ok( paisService.encontrarPorNombrePaisSolar( nombre ) );
+    }
+    
+    @GetMapping("energia-biomasa")
+    public ResponseEntity <List <PaisPlantaEnergiaBiomasa>> obtenerPaisBiomasa ( @RequestParam String nombre ) {
+        return ResponseEntity.ok( paisService.encontrarPorNombrePaisBiomasa ( nombre ) );
     }
 }
